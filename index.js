@@ -2,16 +2,18 @@ const express = require('express')
 const app = express();
 const PORT = 3000;
 
-
-const usuarios = [{ id: "1", nombre: "Juan" }, 
-                "Jocelyn", 
-                "Astrid", 
-                "Maria", 
-                "Ignacia", 
-                "Javier", 
-                "Brian"];
-
 app.use(express.static("public"));
+
+const usuarios = [
+  "Juan",
+  "Jocelyn",
+  "Astrid",
+  "Maria",
+  "Ignacia",
+  "Javier",
+  "Brian",
+];
+
 
 app.get("/abracadabra/usuarios", (req, res) => {
     res.json(usuarios);
@@ -20,7 +22,7 @@ app.get("/abracadabra/usuarios", (req, res) => {
 app.use("/abracadabra/juego/:usuario", (req, res, next) => {
     const Usuario = req.params.usuario;
     const usuariosAuth = usuarios.some(
-      (usuario) => usuario.id === Usuario
+      (usuario) => usuario === Usuario
     );
   
     usuariosAuth
