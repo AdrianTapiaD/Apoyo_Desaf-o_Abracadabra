@@ -4,12 +4,12 @@ const PORT = 3000;
 
 
 const usuarios = ["juan", 
-                "Jocelyn", 
-                "Astrid", 
-                "Maria", 
-                "Ignacia", 
-                "Javier", 
-                "Brian"];
+                "jocelyn", 
+                "astrid", 
+                "maria", 
+                "ignacia", 
+                "javier", 
+                "brian"];
 
 app.use(express.static("public"));
 
