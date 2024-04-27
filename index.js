@@ -3,7 +3,7 @@ const app = express();
 const PORT = 3000;
 
 
-const usuarios = ["Juan", 
+const usuarios = [{ id: "1", nombre: "Juan" }, 
                 "Jocelyn", 
                 "Astrid", 
                 "Maria", 
@@ -17,16 +17,16 @@ app.get("/abracadabra/usuarios", (req, res) => {
     res.json(usuarios);
 });
 
-app.get("/abracadabra/juego/:usuario", (req, res, next) => {
-  const nombreUsuario = req.params.usuario;
-  const isUser = usuarios.map((u) => u.toLowerCase()).includes(nombreUsuario.toLowerCase());
-  isUser ? next() : res.sendFile(__dirname + "/public/assets/who.jpeg");
-});
-
-
-app.get("/abracadabra/juego/:usuario", (req, res, next) => {
-  res.sendFile(__dirname + "/public/index.html");
-});
+app.use("/abracadabra/juego/:usuario", (req, res, next) => {
+    const Usuario = req.params.usuario;
+    const usuariosAuth = usuarios.some(
+      (usuario) => usuario.id === Usuario
+    );
+  
+    usuariosAuth
+      ? res.sendFile(__dirname + "/public/index.html")
+      : res.send('<img src="/assets/who.jpeg">');
+  });
 
 app.get("/abracadabra/conejo/:n", (req, res) => {
     const num = Math.floor(Math.random() * (4 - 1)) + 1;
